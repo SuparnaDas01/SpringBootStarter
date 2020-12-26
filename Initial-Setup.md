@@ -1,6 +1,6 @@
 ## Project Setup
 
-- Generate project using the startup configuration from this site:
+Generate project using the startup configuration from this site:
   https://start.spring.io/
   Select dependency as Web and DevTools
   
