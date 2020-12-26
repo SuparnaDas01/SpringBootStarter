@@ -1,6 +1,9 @@
 ## Use of Request Parameter and using it to query parameters in GET Request
 
 ### Add Request Param and Model to the LoginController class
+
+Model is used to pass data from Controller to JSP
+
 ```
 package com.web.springbootwebapp.controller;
 
@@ -39,5 +42,5 @@ My First JSP!! Welcome ${name}!
 
 ### Restart server and query the following url
 ```
-http://localhost:8080/login?name=%22Joly%22
+http://localhost:8080/login?name="Joly"
 ```
