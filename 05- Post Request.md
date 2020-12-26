@@ -1,4 +1,3 @@
-
 ## Add the code snippets to the login jsp
 
 ```
