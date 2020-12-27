@@ -1,4 +1,4 @@
-####What we will do:
+#### What we will do:
 -Add bootstrap to give basic formatting to the page : We use bootstrap classes container,table and table-striped.
 -We will use webjars
 -Already auto configured by Spring Boot : o.s.w.s.handler.SimpleUrlHandlerMapping : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
@@ -63,3 +63,59 @@
 
 </html>
 ```
+
+### Delete Todos
+Add functionality to delete a todo in "list-todos.jsp"
+```
+<a type="button" class="btn btn-warning" 
+		href="/delete-todo?id=${todo.id}">Delete</a>
+```
+#### Add delete todo method
+```
+package com.web.springbootwebapp.controller;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.web.springbootwebapp.service.TodoService;
+
+
+@Controller
+@SessionAttributes("name")
+public class TodoController {
+
+	@Autowired
+	TodoService service;
+	
+	@RequestMapping(value="/list-todos",method= RequestMethod.GET)	
+	public String showTodos(ModelMap model){			
+		String name = (String) model.get("name");
+		model.put("todos",service.retrieveTodos(name));
+		//model.put("todos",service.retrieveTodos("in28Minutes"));
+		return "list-todos";
+	}
+	
+	@RequestMapping(value="/add-todo",method= RequestMethod.GET)	
+	public String showAddTodoPage(ModelMap model){				
+		return "todo";
+	}
+	
+	@RequestMapping(value="/delete-todo",method= RequestMethod.GET)	
+	public String deleteTodo(@RequestParam int id){			
+		service.deleteTodo(id);
+		return "redirect:/list-todos";
+	}	
+	
+	@RequestMapping(value="/add-todo", method = RequestMethod.POST)
+	public String addTodo(ModelMap model, @RequestParam String desc){
+		service.addTodo((String) model.get("name"), desc, new Date(), false);
+		return "redirect:/list-todos";
+	}
+```	
