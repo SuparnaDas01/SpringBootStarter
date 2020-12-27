@@ -217,12 +217,17 @@ ${todos}
 </body>
 </html>
 
+```
+
 ### Pending for Next Step
 - ${name} is not available in list-todos.jsp
 - in28Minutes is hardcoded in TodoController
 - Login is not required to view the todolist(i.e Its not secure and concept of cookies not implemented)
 - UI is not appealing and need more work
 
-```
+### Verify changes the starting the server
+
+http://localhost:8080/list-todos
+
 
 
