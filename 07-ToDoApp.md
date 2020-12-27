@@ -1,10 +1,10 @@
 
-##What we will do:
+## What we will do:
 Create TodoController and list-todos.jsp
 Make TodoService a @Service and inject it
 
 
-###Snippet - /src/main/java/com.web.springbootwebapp/model/Todo.java
+### Snippet - /src/main/java/com.web.springbootwebapp/model/Todo.java
 ```
 package com.in28minutes.springboot.web.model;
 
@@ -159,3 +159,70 @@ public class TodoService {
 
 }
 ```
+
+### JSP changes
+welcome.jsp - Once user logs in to the application, we want to show him a welcome message to click on a ToDo link
+
+```
+<html>
+<head>
+<title>First Web Application</title>
+</head>
+<body>
+Welcome ${name}!!. <a href="/list-todos">Click here</a> to view the list of Todo's.
+</body>
+</html>
+```
+Once you click on "Click Here"...you will get whitelabel error page since there is no list-todos available. So we will create the controller.
+
+### Under controller create TodoController.java
+```
+package com.web.springbootwebapp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.web.springbootwebapp.service.TodoService;
+
+
+@Controller
+public class TodoController {
+
+	@Autowired
+	TodoService service;
+	
+	@RequestMapping(value="/list-todos",method= RequestMethod.GET)	
+	public String showLoginPage(ModelMap model){		
+		model.put("todos",service.retrieveTodos("in28minutes"));
+		return "list-todos";
+	}
+	
+	
+	
+}
+```
+
+### \src\main\webapp\WEB-INF\jsp\list-todos.jsp
+```
+<html>
+<head>
+<title>To Do's Application</title>
+</head>
+<body>
+List of Todo's
+${todos}
+</body>
+</html>
+
+### Pending for Next Step
+- ${name} is not available in list-todos.jsp
+- in28Minutes is hardcoded in TodoController
+- Login is not required to view the todolist(i.e Its not secure and concept of cookies not implemented)
+- UI is not appealing and need more work
+
+```
+
+
