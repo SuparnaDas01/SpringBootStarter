@@ -7,11 +7,11 @@
 - If you want value to persists across multiple request, then use session
 - How to put value to session. By using annotaion @SessionAttributes(name of model attribute which need to be accessed)
 
-### @SessionAttributes("name") in "TodoController" and "LoginController"
+#### Add @SessionAttributes("name") in "TodoController" and "LoginController"
 ```
 @SessionAttributes("name")
 ```
-### TodoController.java
+#### TodoController.java
 ```
 package com.web.springbootwebapp.controller;
 
@@ -48,3 +48,5 @@ public class TodoController {
 ```
 ###
 Https are stateless protocol , they do not store anything. But session are conversational storage, meaning they persist across requests.
+
+Now you should be able to login and navigate till todos and values of name will still persist.
