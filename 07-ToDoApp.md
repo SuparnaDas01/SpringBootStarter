@@ -195,8 +195,8 @@ public class TodoController {
 	TodoService service;
 	
 	@RequestMapping(value="/list-todos",method= RequestMethod.GET)	
-	public String showLoginPage(ModelMap model){		
-		model.put("todos",service.retrieveTodos("in28minutes"));
+	public String showTodos(ModelMap model){		
+		model.put("todos",service.retrieveTodos("in28Minutes"));
 		return "list-todos";
 	}
 	
